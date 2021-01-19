@@ -1,0 +1,13 @@
+﻿CREATE TABLE Training
+(
+	TrainingId INT IDENTITY(1,1) PRIMARY KEY,
+	Name VARCHAR(200) NULL,
+	Comments VARCHAR(1000) NULL,
+	Sport VARCHAR(100) NOT NULL,
+	[Start] DATETIME NOT NULL,
+	[End] DATETIME NOT NULL,
+	Duration BIGINT NOT NULL,
+	Distance FLOAT NULL,
+	Calories FLOAT NULL,
+	AverageSpeed FLOAT NULL,
+)
