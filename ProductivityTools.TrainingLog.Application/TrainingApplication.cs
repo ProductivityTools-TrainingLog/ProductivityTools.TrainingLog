@@ -1,8 +1,26 @@
-﻿using System;
+﻿using ProductivityTools.TrainingLog.Contract;
+using ProductivityTools.TrainingLog.Database;
+using System;
 
 namespace ProductivityTools.TrainingLog.Application
 {
-    public class TrainingApplication
+    public interface ITrainingApplication
     {
+        void Add(Training training);
+    }
+
+    public class TrainingApplication : ITrainingApplication
+    {
+        private readonly TrainingDbContext Context;
+
+        public TrainingApplication(TrainingDbContext context)
+        {
+            this.Context = context;
+        }
+
+        public void Add(Training training)
+        {
+            
+        }
     }
 }
