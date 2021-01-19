@@ -7,7 +7,7 @@ using System;
 
 namespace ProductivityTools.TrainingLog.Database
 {
-    public class TrainingDbContext: DbContext
+    public class TrainingDbContext : DbContext
     {
         private readonly IConfiguration configuration;
 
@@ -42,7 +42,7 @@ namespace ProductivityTools.TrainingLog.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("mt");
-           // modelBuilder.Entity<Training>().HasKey(x => x.TrainingId);
+            modelBuilder.Entity<Training>().HasKey(x => x.TrainingId);
 
             base.OnModelCreating(modelBuilder);
         }
