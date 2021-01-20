@@ -6,6 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="ProductivityTools.TrainingLog.Contract" Version="0.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProductivityTools.TrainingLog.Application\ProductivityTools.TrainingLog.Application.csproj" />
   </ItemGroup>
 
 

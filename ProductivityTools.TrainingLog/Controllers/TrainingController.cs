@@ -8,6 +8,8 @@ using ProductivityTools.TrainingLog.Contract;
 
 namespace ProductivityTools.TrainingLog.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class TrainingController : Controller
     {
         private readonly ITrainingApplication Application;
@@ -22,9 +24,18 @@ namespace ProductivityTools.TrainingLog.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("Date")]
+        public string Date()
+        {
+            return DateTime.Now.ToString();
+        }
+
+        [HttpPost]
+        [Route("Add")]
         public void Add(Training training)
         {
-
+            Application.Add(training);
         }
 
     }

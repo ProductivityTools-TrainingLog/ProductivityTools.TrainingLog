@@ -16,6 +16,8 @@ namespace ProductivityTools.TrainingLog.Database
             this.configuration = configuration;
         }
 
+        public DbSet<Training> Training { get; set; }
+
         private ILoggerFactory GetLoggerFactory()
         {
             IServiceCollection serviceCollection = new ServiceCollection();

@@ -20,7 +20,8 @@ namespace ProductivityTools.TrainingLog.Application
 
         public void Add(Training training)
         {
-            
+            this.Context.Training.Add(training);
+            this.Context.SaveChanges();
         }
     }
 }
