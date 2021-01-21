@@ -33,7 +33,7 @@ namespace ProductivityTools.TrainingLog.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("Meetings"));
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PTTrainingLog"));
                 optionsBuilder.UseLoggerFactory(GetLoggerFactory());
                 optionsBuilder.EnableSensitiveDataLogging();
                 base.OnConfiguring(optionsBuilder);
@@ -43,7 +43,7 @@ namespace ProductivityTools.TrainingLog.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("mt");
+            modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.Entity<Training>().HasKey(x => x.TrainingId);
 
             base.OnModelCreating(modelBuilder);
