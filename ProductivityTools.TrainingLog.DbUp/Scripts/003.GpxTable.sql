@@ -1,0 +1,8 @@
+﻿CREATE TABLE Gpx
+(
+	GpxId INT IDENTITY(1,1) PRIMARY KEY,
+	TrainingId INT,
+	Gpx VARBINARY (MAX) NULL,
+
+	CONSTRAINT FK_Gpx_Training FOREIGN KEY (TrainingId) REFERENCES Training(TrainingId)
+)
