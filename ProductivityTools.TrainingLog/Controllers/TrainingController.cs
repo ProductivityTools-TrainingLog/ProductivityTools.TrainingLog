@@ -35,7 +35,7 @@ namespace ProductivityTools.TrainingLog.Controllers
         [Route("Add")]
         public void Add(Training training)
         {
-            Application.Add(training);
+            Application.AddRaw(training);
         }
 
     }

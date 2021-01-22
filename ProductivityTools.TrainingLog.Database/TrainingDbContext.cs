@@ -16,7 +16,7 @@ namespace ProductivityTools.TrainingLog.Database
             this.configuration = configuration;
         }
 
-        public DbSet<Training> Training { get; set; }
+        public DbSet<Training> TrainingRaw { get; set; }
 
         private ILoggerFactory GetLoggerFactory()
         {
@@ -44,7 +44,8 @@ namespace ProductivityTools.TrainingLog.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("dbo");
-            modelBuilder.Entity<Training>().HasKey(x => x.TrainingId);
+            modelBuilder.Entity<Training>().ToTable("TrainingRaw").HasKey(x => x.TrainingId);
+                
 
             base.OnModelCreating(modelBuilder);
         }

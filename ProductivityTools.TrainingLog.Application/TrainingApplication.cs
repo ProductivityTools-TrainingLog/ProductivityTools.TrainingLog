@@ -6,7 +6,7 @@ namespace ProductivityTools.TrainingLog.Application
 {
     public interface ITrainingApplication
     {
-        void Add(Training training);
+        void AddRaw(Training training);
     }
 
     public class TrainingApplication : ITrainingApplication
@@ -18,9 +18,9 @@ namespace ProductivityTools.TrainingLog.Application
             this.Context = context;
         }
 
-        public void Add(Training training)
+        public void AddRaw(Training training)
         {
-            this.Context.Training.Add(training);
+            this.Context.TrainingRaw.Add(training);
             this.Context.SaveChanges();
         }
     }
