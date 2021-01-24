@@ -1,12 +1,13 @@
-﻿using ProductivityTools.TrainingLog.Contract;
-using ProductivityTools.TrainingLog.Database;
+﻿using ProductivityTools.TrainingLog.Database;
+using ProductivityTools.TrainingLog.Objects;
 using System;
+using System.Linq;
 
 namespace ProductivityTools.TrainingLog.Application
 {
     public interface ITrainingApplication
     {
-        void AddRaw(Training training);
+        string AddRaw(TrainingRaw training);
     }
 
     public class TrainingApplication : ITrainingApplication
@@ -18,10 +19,25 @@ namespace ProductivityTools.TrainingLog.Application
             this.Context = context;
         }
 
-        public void AddRaw(Training training)
+        public string AddRaw(TrainingRaw training)
         {
-            this.Context.TrainingRaw.Add(training);
-            this.Context.SaveChanges();
+            var x=this.Context.TrainingRaw.ToList();
+            var t=this.Context.TrainingRaw.SingleOrDefault(x => x.Start == training.Start && x.End == training.End && x.Sport == training.Sport);
+            if (t == null)
+            {
+                this.Context.TrainingRaw.Add(training);
+                this.Context.SaveChanges();
+                return "Added";
+            }
+            else
+            {
+                return "Training already exists";
+            }
+        }
+
+        public void ETL()
+        {
+            
         }
     }
 }

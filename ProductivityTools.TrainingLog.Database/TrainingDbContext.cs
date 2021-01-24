@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ProductivityTools.TrainingLog.Contract;
+using ProductivityTools.TrainingLog.Objects;
 using System;
 
 namespace ProductivityTools.TrainingLog.Database
@@ -16,7 +16,8 @@ namespace ProductivityTools.TrainingLog.Database
             this.configuration = configuration;
         }
 
-        public DbSet<Training> TrainingRaw { get; set; }
+        public DbSet<Training> Training { get; set; }
+        public DbSet<TrainingRaw> TrainingRaw { get; set; }
 
         private ILoggerFactory GetLoggerFactory()
         {
@@ -44,7 +45,8 @@ namespace ProductivityTools.TrainingLog.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("dbo");
-            modelBuilder.Entity<Training>().ToTable("TrainingRaw").HasKey(x => x.TrainingId);
+            modelBuilder.Entity<Training>().ToTable("Training").HasKey(x => x.TrainingId);
+            modelBuilder.Entity<TrainingRaw>().ToTable("TrainingRaw").HasBaseType<Training>();
                 
 
             base.OnModelCreating(modelBuilder);

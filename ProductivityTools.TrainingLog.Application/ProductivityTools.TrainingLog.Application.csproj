@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ProductivityTools.TrainingLog.Contract" Version="0.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ProductivityTools.TrainingLog.Database\ProductivityTools.TrainingLog.Database.csproj" />
+    <ProjectReference Include="..\ProductivityTools.TrainingLog.Objects\ProductivityTools.TrainingLog.Objects.csproj" />
   </ItemGroup>
 
 </Project>

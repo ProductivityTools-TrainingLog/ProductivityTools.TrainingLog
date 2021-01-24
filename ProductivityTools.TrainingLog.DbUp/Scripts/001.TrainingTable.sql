@@ -11,6 +11,7 @@
 	Distance DECIMAL(7,3) NULL,
 	Calories DECIMAL(7,2) NULL,
 	AverageSpeed DECIMAL(5,2) NULL,
+	Processed BIT
 )
 
 CREATE TABLE Training

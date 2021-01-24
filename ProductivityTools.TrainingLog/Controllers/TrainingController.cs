@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProductivityTools.TrainingLog.Application;
 using ProductivityTools.TrainingLog.Contract;
+using ProductivityTools.TrainingLog.Objects;
 
 namespace ProductivityTools.TrainingLog.Controllers
 {
@@ -33,9 +34,11 @@ namespace ProductivityTools.TrainingLog.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public void Add(Training training)
+        public string Add(Contract.Training training)
         {
-            Application.AddRaw(training);
+            TrainingRaw trainingRaw = new TrainingRaw();
+            var r = Application.AddRaw(trainingRaw);
+            return r;
         }
 
     }
