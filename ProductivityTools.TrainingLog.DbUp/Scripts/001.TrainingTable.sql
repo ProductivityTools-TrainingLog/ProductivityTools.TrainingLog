@@ -1,6 +1,8 @@
 ﻿CREATE TABLE TrainingRaw
 (
 	TrainingRawId INT IDENTITY(1,1) PRIMARY KEY,
+	Application VARCHAR(100),
+	Account VARCHAR(150),
 	Name VARCHAR(200) NULL,
 	Comment VARCHAR(1000) NULL,
 	Sport VARCHAR(100) NOT NULL,
@@ -28,5 +30,5 @@ CREATE TABLE Training
 	Calories DECIMAL(7,2) NULL,
 	AverageSpeed DECIMAL(5,2) NULL,
 
-	CONSTRAINT FK_Training_TrainingRaw FOREIGN KEY (TrainingId) REFERENCES TrainingRaw(TrainingId)
+	CONSTRAINT FK_Training_TrainingRaw FOREIGN KEY (TrainingId) REFERENCES TrainingRaw(TrainingRawId)
 )

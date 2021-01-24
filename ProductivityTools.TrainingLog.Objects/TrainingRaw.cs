@@ -5,6 +5,8 @@ namespace ProductivityTools.TrainingLog.Objects
     public class TrainingRaw
     {
         public int TrainingId { get; set; }
+        public string Application{ get; set; }
+        public string Account { get; set; }
         public string Name { get; set; }
         public string Comment { get; set; }
         public string Sport { get; set; }
