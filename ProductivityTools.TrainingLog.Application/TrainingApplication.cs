@@ -1,6 +1,9 @@
-﻿using ProductivityTools.TrainingLog.Database;
+﻿using AutoMapper;
+using ProductivityTools.TrainingLog.Application.Etl;
+using ProductivityTools.TrainingLog.Database;
 using ProductivityTools.TrainingLog.Objects;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProductivityTools.TrainingLog.Application
@@ -13,10 +16,12 @@ namespace ProductivityTools.TrainingLog.Application
     public class TrainingApplication : ITrainingApplication
     {
         private readonly TrainingDbContext Context;
+        private readonly IMapper Mapper;
 
-        public TrainingApplication(TrainingDbContext context)
+        public TrainingApplication(TrainingDbContext context, IMapper mapper)
         {
             this.Context = context;
+            this.Mapper = mapper;
         }
 
         public string AddRaw(TrainingRaw training)
@@ -51,8 +56,15 @@ namespace ProductivityTools.TrainingLog.Application
 
         private void ProcessRecord(TrainingRaw trainingRaw)
         {
-            Training training = new Training();
-            
+            List<IRule> rules = new List<IRule>();
+            Training training = this.Mapper.Map<Training>(trainingRaw);
+            foreach (var rule in rules)
+            {
+                rule.Process(trainingRaw, training);
+            }
+
+            this.Context.Training.Add(training);
+            this.Context.SaveChanges();
         }
     }
 }

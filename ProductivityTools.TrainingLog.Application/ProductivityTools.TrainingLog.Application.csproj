@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ProductivityTools.TrainingLog.Database\ProductivityTools.TrainingLog.Database.csproj" />
     <ProjectReference Include="..\ProductivityTools.TrainingLog.Objects\ProductivityTools.TrainingLog.Objects.csproj" />
   </ItemGroup>
