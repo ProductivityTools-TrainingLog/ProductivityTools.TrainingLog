@@ -4,7 +4,7 @@ namespace ProductivityTools.TrainingLog.Objects
 {
     public class TrainingRaw
     {
-        public int TrainingId { get; set; }
+        public int TrainingRawId { get; set; }
         public string Application{ get; set; }
         public string Account { get; set; }
         public string Name { get; set; }

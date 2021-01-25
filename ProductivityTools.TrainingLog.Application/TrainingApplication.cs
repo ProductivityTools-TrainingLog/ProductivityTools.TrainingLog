@@ -40,7 +40,7 @@ namespace ProductivityTools.TrainingLog.Application
             var trainingRaws = this.Context.TrainingRaw.Where(x => x.Processed == false);
             foreach (var trainingRaw in trainingRaws)
             {
-                var record = this.Context.Training.Any(x => x.TrainingId == trainingRaw.TrainingId);
+                var record = this.Context.Training.Any(x => x.TrainingId == trainingRaw.TrainingRawId);
                 if (record == false)
                 {
                     ProcessRecord(trainingRaw);

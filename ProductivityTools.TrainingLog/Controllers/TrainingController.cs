@@ -43,6 +43,5 @@ namespace ProductivityTools.TrainingLog.Controllers
             var r = Application.AddRaw(trainingRaw);
             return r;
         }
-
     }
 }

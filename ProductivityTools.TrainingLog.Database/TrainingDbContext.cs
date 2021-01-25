@@ -46,7 +46,7 @@ namespace ProductivityTools.TrainingLog.Database
         {
             modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.Entity<Training>().ToTable("Training").HasKey(x => x.TrainingId);
-            modelBuilder.Entity<TrainingRaw>().ToTable("TrainingRaw").HasKey(x => x.TrainingId);
+            modelBuilder.Entity<TrainingRaw>().ToTable("TrainingRaw").HasKey(x => x.TrainingRawId);
                 
 
             base.OnModelCreating(modelBuilder);
