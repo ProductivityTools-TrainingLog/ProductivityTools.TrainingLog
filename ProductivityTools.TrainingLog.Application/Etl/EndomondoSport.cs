@@ -9,7 +9,7 @@ namespace ProductivityTools.TrainingLog.Application.Etl
     {
         public void Process(TrainingRaw trainingRaw, Training training)
         {
-            if (trainingRaw.Application == "Endomndo")
+            if (trainingRaw.Application == "Endomondo")
             {
                 if (trainingRaw.Name == "#Stretching")
                 {

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ProductivityTools.TrainingLog.Application;
+using ProductivityTools.TrainingLog.Application.AutoMapper;
 using ProductivityTools.TrainingLog.Database;
 
 namespace ProductivityTools.TrainingLog
@@ -31,7 +32,7 @@ namespace ProductivityTools.TrainingLog
             services.AddControllers();
             services.AddScoped<ITrainingApplication, TrainingApplication>();
             services.AddDbContext<TrainingDbContext>();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup), typeof(TrainingProfile));
             services.AddControllersWithViews();
         }
 

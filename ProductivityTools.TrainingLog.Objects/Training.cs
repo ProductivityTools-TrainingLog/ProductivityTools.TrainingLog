@@ -17,6 +17,5 @@ namespace ProductivityTools.TrainingLog.Objects
         public decimal Distance { get; set; }
         public decimal Calories { get; set; }
         public decimal AverageSpeed { get; set; }
-        public bool Processed { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace ProductivityTools.TrainingLog.Application
     public interface ITrainingApplication
     {
         string AddRaw(TrainingRaw training);
+        void ETL();
     }
 
     public class TrainingApplication : ITrainingApplication
@@ -49,14 +50,18 @@ namespace ProductivityTools.TrainingLog.Application
                 if (record == false)
                 {
                     ProcessRecord(trainingRaw);
+                    //trainingRaw.Processed = true;
                 }
                 
             }
+            this.Context.SaveChanges();
         }
 
         private void ProcessRecord(TrainingRaw trainingRaw)
         {
             List<IRule> rules = new List<IRule>();
+            rules.Add(new EndomondoSport());
+
             Training training = this.Mapper.Map<Training>(trainingRaw);
             foreach (var rule in rules)
             {
@@ -64,7 +69,7 @@ namespace ProductivityTools.TrainingLog.Application
             }
 
             this.Context.Training.Add(training);
-            this.Context.SaveChanges();
+  
         }
     }
 }

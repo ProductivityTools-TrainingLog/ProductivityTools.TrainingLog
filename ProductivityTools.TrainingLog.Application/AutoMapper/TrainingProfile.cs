@@ -10,7 +10,8 @@ namespace ProductivityTools.TrainingLog.Application.AutoMapper
     {
         public TrainingProfile()
         {
-            CreateMap<TrainingRaw, Training>();
+            CreateMap<TrainingRaw, Training>()
+                .ForMember(dst => dst.TrainingId, opt => opt.MapFrom(src => src.TrainingRawId));
         }
     }
 }
