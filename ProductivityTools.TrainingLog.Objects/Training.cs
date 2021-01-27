@@ -9,7 +9,7 @@ namespace ProductivityTools.TrainingLog.Objects
         public int TrainingId { get; set; }
         public string Name { get; set; }
         public string Comment { get; set; }
-        public string Sport { get; set; }
+        public TrainingType Sport { get; set; }
         public string Source { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -44,8 +45,11 @@ namespace ProductivityTools.TrainingLog.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var converter = new EnumToStringConverter<TrainingType>();
+
             modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.Entity<Training>().ToTable("Training").HasKey(x => x.TrainingId);
+            modelBuilder.Entity<Training>().Property(x => x.Sport).HasConversion(converter);
             modelBuilder.Entity<TrainingRaw>().ToTable("TrainingRaw").HasKey(x => x.TrainingRawId);
                 
 
