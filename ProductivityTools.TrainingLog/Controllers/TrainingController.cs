@@ -41,7 +41,6 @@ namespace ProductivityTools.TrainingLog.Controllers
         {
             Objects.Training trainingRaw = this.Mapper.Map<Objects.Training>(training);
             var r = this.Application.AddRaw(trainingRaw);
-            this.Application.ETL();
             return r;
         }
     }

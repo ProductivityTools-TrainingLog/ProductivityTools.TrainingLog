@@ -40,36 +40,5 @@ namespace ProductivityTools.TrainingLog.Application
                 return "Training already exists";
             }
         }
-
-        public void ETL()
-        {
-            //var trainingRaws = this.Context.Training.Where(x => x.Processed == false);
-            //foreach (var training in trainingRaws)
-            //{
-            //    var record = this.Context.Training.Any(x => x.TrainingId == training.TrainingId);
-            //    if (record == false)
-            //    {
-            //        ProcessRecord(training);
-            //        //trainingRaw.Processed = true;
-            //    }
-                
-            //}
-            //this.Context.SaveChanges();
-        }
-
-        private void ProcessRecord(Training training)
-        {
-            //List<IRule> rules = new List<IRule>();
-            //rules.Add(new EndomondoSport());
-
-            //Training training = this.Mapper.Map<Training>(training);
-            //foreach (var rule in rules)
-            //{
-            //    rule.Process(training, training);
-            //}
-
-            this.Context.Training.Add(training);
-  
-        }
     }
 }
