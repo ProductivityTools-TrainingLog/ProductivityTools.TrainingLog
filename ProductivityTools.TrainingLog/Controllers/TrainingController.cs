@@ -6,7 +6,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ProductivityTools.TrainingLog.Application;
 using ProductivityTools.TrainingLog.Contract;
-using ProductivityTools.TrainingLog.Objects;
 
 namespace ProductivityTools.TrainingLog.Controllers
 {
@@ -39,8 +38,7 @@ namespace ProductivityTools.TrainingLog.Controllers
         [Route("Add")]
         public string Add(Contract.Training training)
         {
-            Objects.Training trainingRaw = this.Mapper.Map<Objects.Training>(training);
-            var r = this.Application.AddRaw(trainingRaw);
+            var r = this.Application.Add(training);
             return r;
         }
     }

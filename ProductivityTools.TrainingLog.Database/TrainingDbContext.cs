@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ProductivityTools.TrainingLog.Objects;
+using ProductivityTools.TrainingLog.Contract;
 using System;
 
 namespace ProductivityTools.TrainingLog.Database
@@ -50,8 +50,6 @@ namespace ProductivityTools.TrainingLog.Database
             modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.Entity<Training>().ToTable("Training").HasKey(x => x.TrainingId);
             modelBuilder.Entity<Training>().Property(x => x.Sport).HasConversion(converter);
-           // modelBuilder.Entity<TrainingRaw>().ToTable("TrainingRaw").HasKey(x => x.TrainingRawId);
-                
 
             base.OnModelCreating(modelBuilder);
         }

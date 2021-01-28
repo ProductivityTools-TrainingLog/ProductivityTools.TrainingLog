@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProductivityTools.TrainingLog.Database\ProductivityTools.TrainingLog.Database.csproj" />
-    <ProjectReference Include="..\ProductivityTools.TrainingLog.Objects\ProductivityTools.TrainingLog.Objects.csproj" />
   </ItemGroup>
 
 </Project>

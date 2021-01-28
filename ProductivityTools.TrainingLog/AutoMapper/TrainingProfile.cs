@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ProductivityTools.TrainingLog.Contract;
-using ProductivityTools.TrainingLog.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace ProductivityTools.TrainingLog.AutoMapper
     {
         public TrainingProfile()
         {
-            CreateMap<Contract.Training, Objects.Training>().ReverseMap();
+            //CreateMap<Contract.Training, Objects.Training>().ReverseMap();
         }
     }
 }

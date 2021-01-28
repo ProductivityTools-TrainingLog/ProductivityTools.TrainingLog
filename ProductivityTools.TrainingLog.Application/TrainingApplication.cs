@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using ProductivityTools.TrainingLog.Application.Etl;
+using ProductivityTools.TrainingLog.Contract;
 using ProductivityTools.TrainingLog.Database;
-using ProductivityTools.TrainingLog.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,7 @@ namespace ProductivityTools.TrainingLog.Application
 {
     public interface ITrainingApplication
     {
-        string AddRaw(Training training);
-        void ETL();
+        string Add(Training training);
     }
 
     public class TrainingApplication : ITrainingApplication
@@ -25,7 +23,7 @@ namespace ProductivityTools.TrainingLog.Application
             this.Mapper = mapper;
         }
 
-        public string AddRaw(Training training)
+        public string Add(Training training)
         {
             var x = this.Context.Training.ToList();
             var t = this.Context.Training.SingleOrDefault(x => x.Start == training.Start && x.End == training.End && x.Sport == training.Sport);

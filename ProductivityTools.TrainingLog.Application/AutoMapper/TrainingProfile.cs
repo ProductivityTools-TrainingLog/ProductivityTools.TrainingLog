@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ProductivityTools.TrainingLog.Objects;
 using System;
 using System.Collections.Generic;
 using System.Text;
