@@ -12,7 +12,7 @@ namespace ProductivityTools.TrainingLog.AutoMapper
     {
         public TrainingProfile()
         {
-            CreateMap<Contract.Training, TrainingRaw>().ReverseMap();
+            CreateMap<Contract.Training, Objects.Training>().ReverseMap();
         }
     }
 }

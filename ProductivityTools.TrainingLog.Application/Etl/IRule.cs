@@ -7,6 +7,6 @@ namespace ProductivityTools.TrainingLog.Application.Etl
 {
     interface IRule
     {
-        void Process(TrainingRaw trainingRaw, Training training);
+        void Process(Training trainingRaw, Training training);
     }
 }

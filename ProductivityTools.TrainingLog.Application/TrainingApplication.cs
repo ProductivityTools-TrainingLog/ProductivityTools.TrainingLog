@@ -10,7 +10,7 @@ namespace ProductivityTools.TrainingLog.Application
 {
     public interface ITrainingApplication
     {
-        string AddRaw(TrainingRaw training);
+        string AddRaw(Training training);
         void ETL();
     }
 
@@ -25,13 +25,13 @@ namespace ProductivityTools.TrainingLog.Application
             this.Mapper = mapper;
         }
 
-        public string AddRaw(TrainingRaw training)
+        public string AddRaw(Training training)
         {
-            var x = this.Context.TrainingRaw.ToList();
-            var t = this.Context.TrainingRaw.SingleOrDefault(x => x.Start == training.Start && x.End == training.End && x.Sport == training.Sport);
+            var x = this.Context.Training.ToList();
+            var t = this.Context.Training.SingleOrDefault(x => x.Start == training.Start && x.End == training.End && x.Sport == training.Sport);
             if (t == null)
             {
-                this.Context.TrainingRaw.Add(training);
+                this.Context.Training.Add(training);
                 this.Context.SaveChanges();
                 return "Added";
             }
@@ -43,30 +43,30 @@ namespace ProductivityTools.TrainingLog.Application
 
         public void ETL()
         {
-            var trainingRaws = this.Context.TrainingRaw.Where(x => x.Processed == false);
-            foreach (var trainingRaw in trainingRaws)
-            {
-                var record = this.Context.Training.Any(x => x.TrainingId == trainingRaw.TrainingRawId);
-                if (record == false)
-                {
-                    ProcessRecord(trainingRaw);
-                    //trainingRaw.Processed = true;
-                }
+            //var trainingRaws = this.Context.Training.Where(x => x.Processed == false);
+            //foreach (var training in trainingRaws)
+            //{
+            //    var record = this.Context.Training.Any(x => x.TrainingId == training.TrainingId);
+            //    if (record == false)
+            //    {
+            //        ProcessRecord(training);
+            //        //trainingRaw.Processed = true;
+            //    }
                 
-            }
-            this.Context.SaveChanges();
+            //}
+            //this.Context.SaveChanges();
         }
 
-        private void ProcessRecord(TrainingRaw trainingRaw)
+        private void ProcessRecord(Training training)
         {
-            List<IRule> rules = new List<IRule>();
-            rules.Add(new EndomondoSport());
+            //List<IRule> rules = new List<IRule>();
+            //rules.Add(new EndomondoSport());
 
-            Training training = this.Mapper.Map<Training>(trainingRaw);
-            foreach (var rule in rules)
-            {
-                rule.Process(trainingRaw, training);
-            }
+            //Training training = this.Mapper.Map<Training>(training);
+            //foreach (var rule in rules)
+            //{
+            //    rule.Process(training, training);
+            //}
 
             this.Context.Training.Add(training);
   

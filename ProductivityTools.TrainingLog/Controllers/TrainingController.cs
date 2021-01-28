@@ -39,8 +39,8 @@ namespace ProductivityTools.TrainingLog.Controllers
         [Route("Add")]
         public string Add(Contract.Training training)
         {
-            TrainingRaw trainingRaw = this.Mapper.Map<TrainingRaw>(training);
-            var r = Application.AddRaw(trainingRaw);
+            Objects.Training trainingRaw = this.Mapper.Map<Objects.Training>(training);
+            var r = this.Application.AddRaw(trainingRaw);
             this.Application.ETL();
             return r;
         }
