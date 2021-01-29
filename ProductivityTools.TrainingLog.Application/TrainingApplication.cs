@@ -32,25 +32,41 @@ namespace ProductivityTools.TrainingLog.Application
             {
                 Console.WriteLine("fdsa");
             }
-            AddPhoto(training, dbTraining.TrainingId);
+            AddPhoto(training.Pictures, dbTraining.TrainingId);
+            AddGpx(training.Gpx, dbTraining.TrainingId);
             return dbTraining;
         }
 
-        private void AddPhoto(Training training, int databaseTrainingId)
+        private void AddPhoto(List<byte[]> photos, int databaseTrainingId)
         {
-            foreach (var picture in training.Pictures)
+            foreach (var picture in photos)
             {
                 var hash = ComputeHash(picture);
                 var dbPicture = this.Context.Photo.Any(x => x.TrainingId == databaseTrainingId && x.PhotographHash == hash);
                 if (dbPicture == false)
                 {
                     Photo photo = new Photo();
-                    photo.TrainingId = training.TrainingId;
+                    photo.TrainingId = databaseTrainingId;
                     photo.Photograph = picture;
                     photo.PhotographHash = hash;
                     this.Context.Photo.Add(photo);
                     this.Context.SaveChanges();
                 }
+            }
+        }
+
+        private void AddGpx(byte[] gpx, int databaseTrainingId)
+        {
+            var hash = ComputeHash(gpx);
+            var dbPicture = this.Context.Gpx.Any(x => x.TrainingId == databaseTrainingId && x.GpxFileHash == hash);
+            if (dbPicture == false)
+            {
+                Gpx databaseGpx = new Gpx();
+                databaseGpx.TrainingId = databaseTrainingId;
+                databaseGpx.GpxFile = gpx;
+                databaseGpx.GpxFileHash = hash;
+                this.Context.Gpx.Add(databaseGpx);
+                this.Context.SaveChanges();
             }
         }
 

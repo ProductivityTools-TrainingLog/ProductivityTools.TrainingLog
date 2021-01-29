@@ -2,6 +2,7 @@
 (
 	GpxId INT IDENTITY(1,1) PRIMARY KEY,
 	TrainingId INT,
+	GpxhHash VARBINARY (MAX) NULL,
 	Gpx VARBINARY (MAX) NULL,
 
 	CONSTRAINT FK_Gpx_Training FOREIGN KEY (TrainingId) REFERENCES Training(TrainingId)
