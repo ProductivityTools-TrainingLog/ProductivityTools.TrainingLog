@@ -19,7 +19,7 @@ namespace ProductivityTools.TrainingLog.Database
         }
 
         public DbSet<Training> Training { get; set; }
-        public DbSet<Photo> Photo { get; set; }
+        public DbSet<Photograph> Photo { get; set; }
         public DbSet<Gpx> Gpx { get; set; }
 
         private ILoggerFactory GetLoggerFactory()
@@ -55,7 +55,7 @@ namespace ProductivityTools.TrainingLog.Database
             modelBuilder.Entity<Training>().Ignore(x => x.Gpx);
             modelBuilder.Entity<Training>().Property(x => x.Sport).HasConversion(converter);
 
-            modelBuilder.Entity<Photo>().ToTable("Photo").HasKey(x => x.PhotoId);
+            modelBuilder.Entity<Photograph>().ToTable("Photograph").HasKey(x => x.PhotoId);
             modelBuilder.Entity<Gpx>().ToTable("Gpx").HasKey(x => x.GpxId);
 
             base.OnModelCreating(modelBuilder);

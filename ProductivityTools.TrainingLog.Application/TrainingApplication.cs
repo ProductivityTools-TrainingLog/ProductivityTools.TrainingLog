@@ -42,13 +42,13 @@ namespace ProductivityTools.TrainingLog.Application
             foreach (var picture in photos)
             {
                 var hash = ComputeHash(picture);
-                var dbPicture = this.Context.Photo.Any(x => x.TrainingId == databaseTrainingId && x.PhotographHash == hash);
+                var dbPicture = this.Context.Photo.Any(x => x.TrainingId == databaseTrainingId && x.PhotographFileHash == hash);
                 if (dbPicture == false)
                 {
-                    Photo photo = new Photo();
+                    Photograph photo = new Photograph();
                     photo.TrainingId = databaseTrainingId;
-                    photo.Photograph = picture;
-                    photo.PhotographHash = hash;
+                    photo.PhotographFile = picture;
+                    photo.PhotographFileHash = hash;
                     this.Context.Photo.Add(photo);
                     this.Context.SaveChanges();
                 }
@@ -57,16 +57,19 @@ namespace ProductivityTools.TrainingLog.Application
 
         private void AddGpx(byte[] gpx, int databaseTrainingId)
         {
-            var hash = ComputeHash(gpx);
-            var dbPicture = this.Context.Gpx.Any(x => x.TrainingId == databaseTrainingId && x.GpxFileHash == hash);
-            if (dbPicture == false)
+            if (gpx != null)
             {
-                Gpx databaseGpx = new Gpx();
-                databaseGpx.TrainingId = databaseTrainingId;
-                databaseGpx.GpxFile = gpx;
-                databaseGpx.GpxFileHash = hash;
-                this.Context.Gpx.Add(databaseGpx);
-                this.Context.SaveChanges();
+                var hash = ComputeHash(gpx);
+                var dbPicture = this.Context.Gpx.Any(x => x.TrainingId == databaseTrainingId && x.GpxFileHash == hash);
+                if (dbPicture == false)
+                {
+                    Gpx databaseGpx = new Gpx();
+                    databaseGpx.TrainingId = databaseTrainingId;
+                    databaseGpx.GpxFile = gpx;
+                    databaseGpx.GpxFileHash = hash;
+                    this.Context.Gpx.Add(databaseGpx);
+                    this.Context.SaveChanges();
+                }
             }
         }
 
