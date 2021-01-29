@@ -9,7 +9,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-    <PackageReference Include="ProductivityTools.TrainingLog.Contract" Version="0.0.9" />
+    <PackageReference Include="ProductivityTools.TrainingLog.Contract" Version="0.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProductivityTools.TrainingLog.Model\ProductivityTools.TrainingLog.Model.csproj" />
   </ItemGroup>
 
 </Project>

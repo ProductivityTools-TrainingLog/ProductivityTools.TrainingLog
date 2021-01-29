@@ -36,7 +36,7 @@ namespace ProductivityTools.TrainingLog.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public string Add(Contract.Training training)
+        public Training Add(Contract.Training training)
         {
             var r = this.Application.Add(training);
             return r;

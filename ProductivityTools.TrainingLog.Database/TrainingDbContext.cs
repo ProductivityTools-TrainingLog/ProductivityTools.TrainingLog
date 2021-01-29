@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ProductivityTools.TrainingLog.Contract;
+using ProductivityTools.TrainingLog.Model;
 using System;
 
 namespace ProductivityTools.TrainingLog.Database
@@ -18,6 +19,7 @@ namespace ProductivityTools.TrainingLog.Database
         }
 
         public DbSet<Training> Training { get; set; }
+        public DbSet<Photo> Photo { get; set; }
        // public DbSet<TrainingRaw> TrainingRaw { get; set; }
 
         private ILoggerFactory GetLoggerFactory()
@@ -49,7 +51,11 @@ namespace ProductivityTools.TrainingLog.Database
 
             modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.Entity<Training>().ToTable("Training").HasKey(x => x.TrainingId);
+            modelBuilder.Entity<Training>().Ignore(x => x.Pictures);
+            modelBuilder.Entity<Training>().Ignore(x => x.Gpx);
             modelBuilder.Entity<Training>().Property(x => x.Sport).HasConversion(converter);
+
+            modelBuilder.Entity<Photo>().ToTable("Photo").HasKey(x => x.PhotoId);
 
             base.OnModelCreating(modelBuilder);
         }
