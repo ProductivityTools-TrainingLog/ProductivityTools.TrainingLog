@@ -28,22 +28,26 @@ namespace ProductivityTools.TrainingLog.Application
         public Training Add(Training training)
         {
             Training dbTraining = AddMetaData(training);
-            AddPhoto(training);
+            if (dbTraining.TrainingId == 0)
+            {
+                Console.WriteLine("fdsa");
+            }
+            AddPhoto(training, dbTraining.TrainingId);
             return dbTraining;
         }
 
-        private void AddPhoto(Training training)
+        private void AddPhoto(Training training, int databaseTrainingId)
         {
-
             foreach (var picture in training.Pictures)
             {
                 var hash = ComputeHash(picture);
-                var dbPicture = this.Context.Photo.SingleOrDefault(x => x.TrainingId == training.TrainingId && x.PhotographHash == hash);
-                if (dbPicture == null)
+                var dbPicture = this.Context.Photo.Any(x => x.TrainingId == databaseTrainingId && x.PhotographHash == hash);
+                if (dbPicture == false)
                 {
                     Photo photo = new Photo();
                     photo.TrainingId = training.TrainingId;
                     photo.Photograph = picture;
+                    photo.PhotographHash = hash;
                     this.Context.Photo.Add(photo);
                     this.Context.SaveChanges();
                 }
