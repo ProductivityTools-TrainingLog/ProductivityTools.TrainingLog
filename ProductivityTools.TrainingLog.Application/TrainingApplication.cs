@@ -12,6 +12,7 @@ namespace ProductivityTools.TrainingLog.Application
     public interface ITrainingApplication
     {
         Training Add(Training training);
+        List<Training> Get(string account);
     }
 
     public class TrainingApplication : ITrainingApplication
@@ -95,6 +96,12 @@ namespace ProductivityTools.TrainingLog.Application
             {
                 return t;
             }
+        }
+
+        public List<Training> Get(string account)
+        {
+            var r=this.Context.Training.Where(x => x.Account == account);
+            return r.ToList();
         }
     }
 }

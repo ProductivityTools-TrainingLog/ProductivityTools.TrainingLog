@@ -41,5 +41,13 @@ namespace ProductivityTools.TrainingLog.Controllers
             var r = this.Application.Add(training);
             return r;
         }
+
+        [HttpPost]
+        [Route("Get")]
+        public List<Training> Get(object account)
+        {
+            var result=this.Application.Get(account.ToString());
+            return result;
+        }
     }
 }
