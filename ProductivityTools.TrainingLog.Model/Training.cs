@@ -24,5 +24,7 @@ namespace ProductivityTools.TrainingLog.Model
         public List<byte[]> Pictures { get; set; }
         public byte[] Gpx { get; set; }
 
+        public ICollection<Photograph> Photographs { get; set; }
+        public Gpx GpxRel { get; set; }
     }
 }

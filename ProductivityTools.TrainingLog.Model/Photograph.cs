@@ -8,6 +8,8 @@ namespace ProductivityTools.TrainingLog.Model
         public int TrainingId { get; set; }
         public byte[] PhotographFileHash { get; set; }
         public byte[] PhotographFile { get; set; }
+
+        public Training Training { get; set; }
         
     }
 }

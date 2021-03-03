@@ -8,5 +8,7 @@ namespace ProductivityTools.TrainingLog.Model
         public int TrainingId { get; set; }
         public byte[] GpxFileHash { get; set; }
         public byte[] GpxFile { get; set; }
+
+        public Training Training { get; set; }
     }
 }
