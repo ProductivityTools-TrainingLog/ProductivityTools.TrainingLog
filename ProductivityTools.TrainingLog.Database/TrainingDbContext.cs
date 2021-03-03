@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ProductivityTools.TrainingLog.Contract;
+using ProductivityTools.TrainingLog.Database.Entities;
 using ProductivityTools.TrainingLog.Model;
 using System;
 
@@ -47,7 +47,7 @@ namespace ProductivityTools.TrainingLog.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var converter = new EnumToStringConverter<TrainingType>();
+            var converter = new EnumToStringConverter<Contract.TrainingType>();
 
             modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.Entity<Training>().ToTable("Training").HasKey(x => x.TrainingId);

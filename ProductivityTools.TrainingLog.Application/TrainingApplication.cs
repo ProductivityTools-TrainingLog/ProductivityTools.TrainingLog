@@ -12,7 +12,8 @@ namespace ProductivityTools.TrainingLog.Application
     public interface ITrainingApplication
     {
         Training Add(Training training);
-        List<Training> Get(string account);
+        List<Training> List(string account);
+        Training Get(int trainingId);
     }
 
     public class TrainingApplication : ITrainingApplication
@@ -85,23 +86,31 @@ namespace ProductivityTools.TrainingLog.Application
 
         private Training AddMetaData(Training training)
         {
+            Database.Entities.Training dbTraining = this.Mapper.Map<Database.Entities.Training>(training);
             var t = this.Context.Training.SingleOrDefault(x => x.Start == training.Start && x.End == training.End && x.Sport == training.Sport);
             if (t == null)
             {
-                this.Context.Training.Add(training);
+                this.Context.Training.Add(dbTraining);
                 this.Context.SaveChanges();
                 return training;
             }
             else
             {
-                return t;
+                return this.Mapper.Map<Training>(t);
             }
         }
 
-        public List<Training> Get(string account)
+        public List<Training> List(string account)
         {
-            var r=this.Context.Training.Where(x => x.Account == account);
-            return r.ToList();
+            var r = this.Context.Training.Where(x => x.Account == account);
+            return this.Mapper.Map<List<Training>>(r.ToList());
+        }
+
+        public Training Get(int trainingId)
+        {
+            throw new Exception();
+            //var r = this.Context.Training.Include( .Single(x => x.TrainingId == trainingId);
+
         }
     }
 }

@@ -43,10 +43,18 @@ namespace ProductivityTools.TrainingLog.Controllers
         }
 
         [HttpPost]
-        [Route("Get")]
-        public List<Training> Get(object account)
+        [Route("List")]
+        public List<Training> List(object account)
         {
-            var result=this.Application.Get(account.ToString());
+            var result=this.Application.List(account.ToString());
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Get")]
+        public Training Get(int trainingId)
+        {
+            var result = this.Application.Get(trainingId);
             return result;
         }
     }
