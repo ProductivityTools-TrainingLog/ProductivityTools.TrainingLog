@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ProductivityTools.TrainingLog.Contract;
 using ProductivityTools.TrainingLog.Database;
 using ProductivityTools.TrainingLog.Model;
 using System;
@@ -11,9 +10,9 @@ namespace ProductivityTools.TrainingLog.Application
 {
     public interface ITrainingApplication
     {
-        Training Add(Training training);
-        List<Training> List(string account);
-        Training Get(int trainingId);
+        Contract.Training Add(Contract.Training training);
+        List<Contract.Training> List(string account);
+        Contract.Training Get(int trainingId);
     }
 
     public class TrainingApplication : ITrainingApplication
@@ -27,9 +26,9 @@ namespace ProductivityTools.TrainingLog.Application
             this.Mapper = mapper;
         }
 
-        public Training Add(Training training)
+        public Contract.Training Add(Contract.Training training)
         {
-            Training dbTraining = AddMetaData(training);
+            Contract.Training dbTraining = AddMetaData(training);
             if (dbTraining.TrainingId == 0)
             {
                 Console.WriteLine("fdsa");
@@ -84,9 +83,9 @@ namespace ProductivityTools.TrainingLog.Application
             }
         }
 
-        private Training AddMetaData(Training training)
+        private Contract.Training AddMetaData(Contract.Training training)
         {
-            Database.Entities.Training dbTraining = this.Mapper.Map<Database.Entities.Training>(training);
+            Model.Training dbTraining = this.Mapper.Map<Model.Training>(training);
             var t = this.Context.Training.SingleOrDefault(x => x.Start == training.Start && x.End == training.End && x.Sport == training.Sport);
             if (t == null)
             {
@@ -96,17 +95,17 @@ namespace ProductivityTools.TrainingLog.Application
             }
             else
             {
-                return this.Mapper.Map<Training>(t);
+                return this.Mapper.Map<Contract.Training>(t);
             }
         }
 
-        public List<Training> List(string account)
+        public List<Contract.Training> List(string account)
         {
             var r = this.Context.Training.Where(x => x.Account == account);
-            return this.Mapper.Map<List<Training>>(r.ToList());
+            return this.Mapper.Map<List<Contract.Training>>(r.ToList());
         }
 
-        public Training Get(int trainingId)
+        public Contract.Training Get(int trainingId)
         {
             throw new Exception();
             //var r = this.Context.Training.Include( .Single(x => x.TrainingId == trainingId);

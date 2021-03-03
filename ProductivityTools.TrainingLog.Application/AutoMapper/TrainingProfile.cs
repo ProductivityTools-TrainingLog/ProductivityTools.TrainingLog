@@ -10,7 +10,7 @@ namespace ProductivityTools.TrainingLog.Application.AutoMapper
     {
         public TrainingProfile()
         {
-            CreateMap<Training, ProductivityTools.TrainingLog.Database.Entities.Training>()
+            CreateMap<Contract.Training, Training>()
               .ReverseMap();
         }
     }

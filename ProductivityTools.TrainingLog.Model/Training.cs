@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProductivityTools.TrainingLog.Database.Entities
+namespace ProductivityTools.TrainingLog.Model
 {
     public class Training
     {
@@ -23,5 +23,6 @@ namespace ProductivityTools.TrainingLog.Database.Entities
         public decimal AverageSpeed { get; set; }
         public List<byte[]> Pictures { get; set; }
         public byte[] Gpx { get; set; }
+
     }
 }
