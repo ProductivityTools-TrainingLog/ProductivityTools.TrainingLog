@@ -21,10 +21,10 @@ namespace ProductivityTools.TrainingLog.Model
         public decimal Distance { get; set; }
         public decimal Calories { get; set; }
         public decimal AverageSpeed { get; set; }
-        public List<byte[]> Pictures { get; set; }
-        public byte[] Gpx { get; set; }
+        //public List<byte[]> Pictures { get; set; }
+        //public byte[] Gpx { get; set; }
 
         public ICollection<Photograph> Photographs { get; set; }
-        public Gpx GpxRel { get; set; }
+        public Gpx Gpx { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace ProductivityTools.TrainingLog.Database
             modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.Entity<Training>().ToTable("Training").HasKey(x => x.TrainingId);
             modelBuilder.Entity<Training>().HasMany(x => x.Photographs).WithOne(x => x.Training);
-            modelBuilder.Entity<Training>().HasOne(x => x.GpxRel).WithOne(x => x.Training);
+            modelBuilder.Entity<Training>().HasOne(x => x.Gpx).WithOne(x => x.Training);
             modelBuilder.Entity<Training>().Property(x => x.Sport).HasConversion(converter);
 
             modelBuilder.Entity<Photograph>().ToTable("Photograph").HasKey(x => x.PhotoId);

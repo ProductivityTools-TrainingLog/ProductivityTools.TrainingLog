@@ -10,8 +10,10 @@ namespace ProductivityTools.TrainingLog.Application.AutoMapper
     {
         public TrainingProfile()
         {
-            CreateMap<Contract.Training, Training>()
+            CreateMap<Model.Training, Contract.Training>()
               .ReverseMap();
+            //CreateMap<List<Model.Training>, List<Training>>()
+            //    .ReverseMap();
         }
     }
 }
