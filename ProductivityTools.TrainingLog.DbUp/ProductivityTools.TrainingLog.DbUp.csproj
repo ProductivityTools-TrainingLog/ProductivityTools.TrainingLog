@@ -9,9 +9,11 @@
     <None Remove="Scripts\001.TrainingTable.sql" />
     <None Remove="Scripts\002.PhotoTable.sql" />
     <None Remove="Scripts\003.GpxTable.sql" />
+    <None Remove="Scripts\004.ExternalIds.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\004.ExternalIds.sql" />
     <EmbeddedResource Include="Scripts\003.GpxTable.sql" />
     <EmbeddedResource Include="Scripts\002.PhotoTable.sql" />
     <EmbeddedResource Include="Scripts\001.TrainingTable.sql" />

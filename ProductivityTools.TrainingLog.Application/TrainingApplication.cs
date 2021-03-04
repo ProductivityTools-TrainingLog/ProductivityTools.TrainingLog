@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ProductivityTools.TrainingLog.Database;
 using ProductivityTools.TrainingLog.Model;
 using System;
@@ -107,8 +108,12 @@ namespace ProductivityTools.TrainingLog.Application
 
         public Contract.Training Get(int trainingId)
         {
-            throw new Exception();
-            //var r = this.Context.Training.Include( .Single(x => x.TrainingId == trainingId);
+            //throw new Exception();
+            var r = this.Context.Training
+                .Include(x => x.Gpx)
+                .Include(x => x.Photographs)
+                .Single(x => x.TrainingId == trainingId);
+            return this.Mapper.Map<Contract.Training>(r); ;
 
         }
     }
