@@ -55,8 +55,10 @@ namespace ProductivityTools.TrainingLog.Database
             modelBuilder.Entity<Training>().Property(x => x.Sport).HasConversion(converter);
 
             modelBuilder.Entity<Photograph>().ToTable("Photograph").HasKey(x => x.PhotoId);
-            
+
             modelBuilder.Entity<Gpx>().ToTable("Gpx").HasKey(x => x.GpxId);
+
+            modelBuilder.Entity<TrainingExternalId>().ToTable("TrainingExternalId").HasKey(x => new { x.TrainingId, x.Application });
 
             base.OnModelCreating(modelBuilder);
         }

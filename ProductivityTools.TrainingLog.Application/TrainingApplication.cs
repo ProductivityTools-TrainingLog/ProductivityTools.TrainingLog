@@ -112,6 +112,7 @@ namespace ProductivityTools.TrainingLog.Application
             var r = this.Context.Training
                 .Include(x => x.Gpx)
                 .Include(x => x.Photographs)
+                .Include(x=>x.TrainingExternalIdList)
                 .Single(x => x.TrainingId == trainingId);
             return this.Mapper.Map<Contract.Training>(r); ;
 

@@ -14,6 +14,8 @@ namespace ProductivityTools.TrainingLog.Application.AutoMapper
             CreateMap<Model.Training, Contract.Training>()
                .ForMember(dest => dest.Gpx, opt => opt.MapFrom(src => src.Gpx.GpxFile))
                .ForMember(dest => dest.Pictures, opt => opt.MapFrom(src => src.Photographs.Select(x => x.PhotographFile)))
+               .ForMember(dest => dest.ExternalIdList, opt => opt.MapFrom(
+                   src => src.TrainingExternalIdList.ToDictionary(x => x.Application, x => x.Key)))
               .ReverseMap();
         }
     }

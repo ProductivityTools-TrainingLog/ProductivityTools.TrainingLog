@@ -26,5 +26,6 @@ namespace ProductivityTools.TrainingLog.Model
 
         public ICollection<Photograph> Photographs { get; set; }
         public Gpx Gpx { get; set; }
+        public ICollection<TrainingExternalId> TrainingExternalIdList { get; set; }
     }
 }
