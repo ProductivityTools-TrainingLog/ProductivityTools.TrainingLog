@@ -14,6 +14,7 @@ namespace ProductivityTools.TrainingLog.Application
         Contract.Training Add(Contract.Training training);
         List<Contract.Training> List(string account);
         Contract.Training Get(int trainingId);
+        void UpdateExternalId(int trainingId, string externalSystemName, string externalSystemId);
     }
 
     public class TrainingApplication : ITrainingApplication
@@ -29,14 +30,14 @@ namespace ProductivityTools.TrainingLog.Application
 
         public Contract.Training Add(Contract.Training training)
         {
-            Contract.Training dbTraining = AddMetaData(training);
+            Model.Training dbTraining = AddMetaData(training);
             if (dbTraining.TrainingId == 0)
             {
                 Console.WriteLine("fdsa");
             }
             AddPhoto(training.Pictures, dbTraining.TrainingId);
             AddGpx(training.Gpx, dbTraining.TrainingId);
-            return dbTraining;
+            return this.Mapper.Map<Contract.Training>(dbTraining);
         }
 
         private void AddPhoto(List<byte[]> photos, int databaseTrainingId)
@@ -84,25 +85,26 @@ namespace ProductivityTools.TrainingLog.Application
             }
         }
 
-        private Contract.Training AddMetaData(Contract.Training training)
+        private Model.Training AddMetaData(Contract.Training training)
         {
             Model.Training dbTraining = this.Mapper.Map<Model.Training>(training);
-            var t = this.Context.Training.SingleOrDefault(x => x.Start == training.Start && x.End == training.End && x.Sport == training.Sport);
+            var t = this.Context.Training.SingleOrDefault(x => x.Account == training.Account && x.Start == training.Start && x.End == training.End && x.Sport == training.Sport);
             if (t == null)
             {
                 this.Context.Training.Add(dbTraining);
                 this.Context.SaveChanges();
-                return training;
+                return dbTraining;
             }
             else
             {
-                return this.Mapper.Map<Contract.Training>(t);
+                return t;
             }
         }
 
         public List<Contract.Training> List(string account)
         {
-            var r = this.Context.Training.Where(x => x.Account == account);
+            var photo = this.Context.Photo.Select(x => x.TrainingId).ToList();
+            var r = this.Context.Training.Where(x => x.Account == account && photo.Contains(x.TrainingId));
             return this.Mapper.Map<List<Contract.Training>>(r.ToList());
         }
 
@@ -112,10 +114,15 @@ namespace ProductivityTools.TrainingLog.Application
             var r = this.Context.Training
                 .Include(x => x.Gpx)
                 .Include(x => x.Photographs)
-                .Include(x=>x.TrainingExternalIdList)
+                .Include(x => x.TrainingExternalIdList)
                 .Single(x => x.TrainingId == trainingId);
             return this.Mapper.Map<Contract.Training>(r); ;
 
+        }
+
+        public void UpdateExternalId(int trainingId, string externalSystemName, string externalSystemId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

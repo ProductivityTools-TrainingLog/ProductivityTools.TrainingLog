@@ -42,6 +42,12 @@ namespace ProductivityTools.TrainingLog.Controllers
             return r;
         }
 
+        [Route("Add")]
+        public void UpdateExternalId(int trainingId, string externalSystemName, string externalSystemId)
+        {
+            this.Application.UpdateExternalId(trainingId, externalSystemName, externalSystemId);
+        }
+
         [HttpPost]
         [Route("List")]
         public List<Training> List(object account)

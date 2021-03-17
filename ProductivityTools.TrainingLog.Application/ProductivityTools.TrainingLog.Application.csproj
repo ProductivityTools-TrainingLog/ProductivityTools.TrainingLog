@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="ProductivityTools.TrainingLog.Contract" Version="0.0.11" />
+    <PackageReference Include="ProductivityTools.TrainingLog.Contract" Version="0.0.12" />
   </ItemGroup>
 
   <ItemGroup>
