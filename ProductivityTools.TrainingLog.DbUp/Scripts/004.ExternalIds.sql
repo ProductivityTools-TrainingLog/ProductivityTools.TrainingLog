@@ -1,6 +1,6 @@
 ﻿CREATE TABLE TrainingExternalId
 (
-	TrainingId INT IDENTITY(1,1),
+	TrainingId INT,
 	Application VARCHAR(100),
 	[Key] VARCHAR(100),
 

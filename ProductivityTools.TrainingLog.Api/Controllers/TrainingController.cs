@@ -34,6 +34,11 @@ namespace ProductivityTools.TrainingLog.Controllers
             return DateTime.Now.ToString();
         }
 
+        /// <summary>
+        /// Adds new training. If training exists doesn't do anything. It checks if training exist comparing start date, end date and sport. Two sports with the same start date, end date and and with the same type cannot exists
+        /// </summary>
+        /// <param name="training"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Add")]
         public Training Add(Contract.Training training)
@@ -42,10 +47,11 @@ namespace ProductivityTools.TrainingLog.Controllers
             return r;
         }
 
-        [Route("Add")]
-        public void UpdateExternalId(int trainingId, string externalSystemName, string externalSystemId)
+        [HttpPost]
+        [Route("UpdateExternalTrainingId")]
+        public void UpdateExternalId(int trainingId, string externalSystemName, string externalTrainingId)
         {
-            this.Application.UpdateExternalId(trainingId, externalSystemName, externalSystemId);
+            this.Application.UpdateExternalId(trainingId, externalSystemName, externalTrainingId);
         }
 
         [HttpPost]

@@ -20,6 +20,7 @@ namespace ProductivityTools.TrainingLog.Database
         public DbSet<Training> Training { get; set; }
         public DbSet<Photograph> Photo { get; set; }
         public DbSet<Gpx> Gpx { get; set; }
+        public DbSet<TrainingExternalId> TrainingExternalId { get; set; }
 
         private ILoggerFactory GetLoggerFactory()
         {

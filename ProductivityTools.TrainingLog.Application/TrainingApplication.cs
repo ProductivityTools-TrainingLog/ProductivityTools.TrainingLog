@@ -103,8 +103,9 @@ namespace ProductivityTools.TrainingLog.Application
 
         public List<Contract.Training> List(string account)
         {
-            var photo = this.Context.Photo.Select(x => x.TrainingId).ToList();
-            var r = this.Context.Training.Where(x => x.Account == account && photo.Contains(x.TrainingId));
+            var photo = this.Context.Photo.Select(x => x.TrainingId).Take(10).ToList();
+            var r = this.Context.Training.Include(x => x.TrainingExternalIdList)
+                .Where(x => x.Account == account && photo.Contains(x.TrainingId));
             return this.Mapper.Map<List<Contract.Training>>(r.ToList());
         }
 
@@ -122,7 +123,20 @@ namespace ProductivityTools.TrainingLog.Application
 
         public void UpdateExternalId(int trainingId, string externalSystemName, string externalSystemId)
         {
-            throw new NotImplementedException();
+            var trainingExternalId = this.Context.TrainingExternalId.SingleOrDefault(x => x.TrainingId == trainingId && x.Application == externalSystemName);
+            if (trainingExternalId == null)
+            {
+                var @new = new TrainingExternalId();
+                @new.Application = externalSystemName;
+                @new.Key = externalSystemId;
+                @new.TrainingId = trainingId;
+                this.Context.TrainingExternalId.Add(@new);
+            }
+            else
+            {
+                trainingExternalId.Key = externalSystemId;
+            }
+            this.Context.SaveChanges();
         }
     }
 }
