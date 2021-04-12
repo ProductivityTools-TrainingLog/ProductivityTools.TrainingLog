@@ -42,18 +42,21 @@ namespace ProductivityTools.TrainingLog.Application
 
         private void AddPhoto(List<byte[]> photos, int databaseTrainingId)
         {
-            foreach (var picture in photos)
+            if (photos != null)
             {
-                var hash = ComputeHash(picture);
-                var dbPicture = this.Context.Photo.Any(x => x.TrainingId == databaseTrainingId && x.PhotographFileHash == hash);
-                if (dbPicture == false)
+                foreach (var picture in photos)
                 {
-                    Photograph photo = new Photograph();
-                    photo.TrainingId = databaseTrainingId;
-                    photo.PhotographFile = picture;
-                    photo.PhotographFileHash = hash;
-                    this.Context.Photo.Add(photo);
-                    this.Context.SaveChanges();
+                    var hash = ComputeHash(picture);
+                    var dbPicture = this.Context.Photo.Any(x => x.TrainingId == databaseTrainingId && x.PhotographFileHash == hash);
+                    if (dbPicture == false)
+                    {
+                        Photograph photo = new Photograph();
+                        photo.TrainingId = databaseTrainingId;
+                        photo.PhotographFile = picture;
+                        photo.PhotographFileHash = hash;
+                        this.Context.Photo.Add(photo);
+                        this.Context.SaveChanges();
+                    }
                 }
             }
         }
