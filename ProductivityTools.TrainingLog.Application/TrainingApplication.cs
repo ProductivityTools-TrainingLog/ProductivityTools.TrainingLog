@@ -106,9 +106,14 @@ namespace ProductivityTools.TrainingLog.Application
 
         public List<Contract.Training> List(string account)
         {
-            var photo = this.Context.Photo.Select(x => x.TrainingId).Take(10).ToList();
+            //var photo = this.Context.Photo.Select(x => x.TrainingId).Take(10).ToList();
+            //var r = this.Context.Training.Include(x => x.TrainingExternalIdList)
+            //    .Where(x => x.Account == account && photo.Contains(x.TrainingId));
+            //return this.Mapper.Map<List<Contract.Training>>(r.ToList());
+
+            
             var r = this.Context.Training.Include(x => x.TrainingExternalIdList)
-                .Where(x => x.Account == account && photo.Contains(x.TrainingId));
+                .Where(x => x.Account == account);
             return this.Mapper.Map<List<Contract.Training>>(r.ToList());
         }
 
