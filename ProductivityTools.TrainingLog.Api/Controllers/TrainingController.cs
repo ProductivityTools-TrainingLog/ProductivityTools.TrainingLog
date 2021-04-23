@@ -56,9 +56,10 @@ namespace ProductivityTools.TrainingLog.Controllers
 
         [HttpPost]
         [Route("List")]
-        public List<Training> List(object account)
+        public List<Training> List(string account, DateTime fromdate)
         {
-            var result=this.Application.List(account.ToString());
+
+            var result=this.Application.List(account, fromdate);
             return result;
         }
 

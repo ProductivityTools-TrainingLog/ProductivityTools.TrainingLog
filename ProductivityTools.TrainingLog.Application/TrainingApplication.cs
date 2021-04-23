@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Internal;
 using Microsoft.EntityFrameworkCore;
 using ProductivityTools.TrainingLog.Database;
 using ProductivityTools.TrainingLog.Model;
@@ -12,7 +13,7 @@ namespace ProductivityTools.TrainingLog.Application
     public interface ITrainingApplication
     {
         Contract.Training Add(Contract.Training training);
-        List<Contract.Training> List(string account);
+        List<Contract.Training> List(string account, DateTime? fromDate);
         Contract.Training Get(int trainingId);
         void UpdateExternalId(int trainingId, string externalSystemName, string externalSystemId);
     }
@@ -37,6 +38,9 @@ namespace ProductivityTools.TrainingLog.Application
             }
             AddPhoto(training.Pictures, dbTraining.TrainingId);
             AddGpx(training.Gpx, dbTraining.TrainingId);
+
+            training.ExternalIdList.ForAll(x => UpdateExternalId(dbTraining.TrainingId, x.Key, x.Value));
+
             return this.Mapper.Map<Contract.Training>(dbTraining);
         }
 
@@ -104,7 +108,7 @@ namespace ProductivityTools.TrainingLog.Application
             }
         }
 
-        public List<Contract.Training> List(string account)
+        public List<Contract.Training> List(string account, DateTime? fromDate=null)
         {
             //var photo = this.Context.Photo.Select(x => x.TrainingId).Take(10).ToList();
             //var r = this.Context.Training.Include(x => x.TrainingExternalIdList)
@@ -114,6 +118,10 @@ namespace ProductivityTools.TrainingLog.Application
             
             var r = this.Context.Training.Include(x => x.TrainingExternalIdList)
                 .Where(x => x.Account == account);
+            if(fromDate.HasValue)
+            {
+                r = r.Where(x => x.Start > fromDate);
+            }
             return this.Mapper.Map<List<Contract.Training>>(r.ToList());
         }
 
