@@ -10,6 +10,11 @@ pipeline {
                 echo 'hello'
             }
         }
+		stage('workplacePath'){
+			steps{
+				echo "${env.WORKSPACE}"
+			}
+		}
         stage('deleteWorkspace') {
             steps {
                 deleteDir()
@@ -20,55 +25,55 @@ pipeline {
             steps {
                 // Get some code from a GitHub repository
                 git branch: 'master',
-                url: 'https://github.com/pwujczyk/ProductivityTools.Meetings'
+                url: 'https://github.com/ProductivityTools-TrainingLog/ProductivityTools.TrainingLog.Api'
             }
         }
         stage('build') {
             steps {
-                bat(script: "dotnet publish ProductivityTools.Meetings.sln -c Release ", returnStdout: true)
+				echo 'starting bddduild'
+                bat('dotnet publish ProductivityTools.TrainingLog.Api.sln -c Release')
             }
         }
         stage('deleteDbMigratorDir') {
             steps {
-                bat('if exist "C:\\Bin\\MeetingsDdbMigration" RMDIR /Q/S "C:\\Bin\\MeetingsDdbMigration"')
+                bat('if exist "C:\\Bin\\TrainingLogDdbMigration" RMDIR /Q/S "C:\\Bin\\TrainingLogDdbMigration"')
             }
         }
         stage('copyDbMigratorFiles') {
             steps {
-                bat('xcopy "C:\\Program Files (x86)\\Jenkins\\workspace\\Meetings\\src\\Server\\ProductivityTools.Meetings.DatabaseMigrations\\bin\\Release\\netcoreapp3.1\\publish" "C:\\Bin\\MeetingsDdbMigration\\" /O /X /E /H /K')
+                bat('xcopy "ProductivityTools.TrainingLog.DbUp\\bin\\Release\\netcoreapp3.1\\publish\\" "C:\\Bin\\TrainingLogDdbMigration\\" /O /X /E /H /K')
             }
         }
 
         stage('runDbMigratorFiles') {
             steps {
-                bat('C:\\Bin\\MeetingsDdbMigration\\ProductivityTools.Meetings.DatabaseMigrations.exe')
+                bat('C:\\Bin\\TrainingLogDdbMigration\\ProductivityTools.TrainingLog.DbUp.exe')
             }
         }
 
         stage('stopMeetingsOnIis') {
             steps {
-                bat('%windir%\\system32\\inetsrv\\appcmd stop site /site.name:meetings')
+                bat('%windir%\\system32\\inetsrv\\appcmd stop site /site.name:TrainingLog')
             }
         }
 
         stage('deleteIisDir') {
             steps {
                 retry(5) {
-                    bat('if exist "C:\\Bin\\Meetings" RMDIR /Q/S "C:\\Bin\\Meetings"')
+                    bat('if exist "C:\\Bin\\TrainingLog" RMDIR /Q/S "C:\\Bin\\TrainingLog"')
                 }
 
             }
         }
         stage('copyIisFiles') {
             steps {
-                bat('xcopy "C:\\Program Files (x86)\\Jenkins\\workspace\\Meetings\\src\\Server\\ProductivityTools.Meetings.WebApi\\bin\\Release\\netcoreapp3.1\\publish" "C:\\Bin\\Meetings\\" /O /X /E /H /K')
-				                      
+                bat('xcopy "Src\\Server\\ProductivityTools.GetTask3.API\\bin\\Release\\netcoreapp3.1\\publish\\" "C:\\Bin\\GetTask3\\" /O /X /E /H /K')				              
             }
         }
 
         stage('startMeetingsOnIis') {
             steps {
-                bat('%windir%\\system32\\inetsrv\\appcmd start site /site.name:meetings')
+                bat('%windir%\\system32\\inetsrv\\appcmd start site /site.name:GetTask3')
             }
         }
         stage('byebye') {
