@@ -67,13 +67,13 @@ pipeline {
         }
         stage('copyIisFiles') {
             steps {
-                bat('xcopy "Src\\bin\\Release\\netcoreapp3.1\\publish\\" "C:\\Bin\\GetTask3\\" /O /X /E /H /K')				              
+                bat('xcopy "ProductivityTools.TrainingLog.Api\\bin\\Release\\netcoreapp3.1\\publish\\" "C:\\Bin\\TrainingLog\\" /O /X /E /H /K')				              
             }
         }
 
         stage('startMeetingsOnIis') {
             steps {
-                bat('%windir%\\system32\\inetsrv\\appcmd start site /site.name:GetTask3')
+                bat('%windir%\\system32\\inetsrv\\appcmd start site /site.name:TrainingLog')
             }
         }
         stage('byebye') {
