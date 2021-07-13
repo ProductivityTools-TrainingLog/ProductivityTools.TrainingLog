@@ -39,7 +39,10 @@ namespace ProductivityTools.TrainingLog.Application
             AddPhoto(training.Pictures, dbTraining.TrainingId);
             AddGpx(training.Gpx, dbTraining.TrainingId);
 
-            training.ExternalIdList.ForAll(x => UpdateExternalId(dbTraining.TrainingId, x.Key, x.Value));
+            if (training.ExternalIdList != null)
+            {
+                training.ExternalIdList.ForAll(x => UpdateExternalId(dbTraining.TrainingId, x.Key, x.Value));
+            }
 
             return this.Mapper.Map<Contract.Training>(dbTraining);
         }
